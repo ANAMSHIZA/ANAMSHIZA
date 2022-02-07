@@ -1,5 +1,7 @@
 import datetime
 from datetime import time
+from datetime import date
+from apscheduler.scheduler import Scheduler
 
 jour_ouvrables=[] 
 jour_semi_ouvrables=[]   
@@ -37,7 +39,8 @@ else:
 h=time.hour
 m=time.minute
 
-if wd==0 or wd==1 or wd==2 or wd==3 :
+#sonnerie jours ouvrables
+if wd==0 or wd==1 or wd==3 or wd==4 :
     if h==8 and m==20 or h==8 and m==25 :
         print("sonnerie")
     elif h==9 and m==20 or h==9 and m==25 :
@@ -59,6 +62,21 @@ if wd==0 or wd==1 or wd==2 or wd==3 :
     elif h==17 and m==0 or h==17 and m==55 :
         print("sonnerie")
     elif h==18 and m==0 :
+        print("sonnerie")
+    else:
+        print("pas de sonnerie")
+        
+#sonnerie jours semi-ouvrés
+if wd==2 or wd==5 :
+    if h==8 and m==20 or h==8 and m==25 :
+        print("sonnerie")
+    elif h==9 and m==20 or h==9 and m==25 :
+        print("sonnerie")
+    elif h==10 and m==25 or h==10 and m==35 :
+        print("sonnerie")
+    elif h==11 and m==30 or h==11 and m==35 :
+        print("sonnerie")
+    elif h==12 and m==30
         print("sonnerie")
     else:
         print("pas de sonnerie")
