@@ -26,10 +26,39 @@ if wd==jour_ouvrables[0] or wd==jour_ouvrables[1] or wd==jour_ouvrables[2] or wd
 else:
     print("jour semi_ouvré")
     
-jour_ouvrables[0]="lundi"
-jour_ouvrables[1]="mardi"
-jour_ouvrables[2]="jeudi"
-jour_ouvrables[3]="vendredi"
-jour_semi_ouvrables[0]="mercredi"
-jour_semi_ouvrables[1]="jeudi"
+#jour_ouvrables[0]="lundi"
+#jour_ouvrables[1]="mardi"
+#jour_ouvrables[2]="jeudi"
+#jour_ouvrables[3]="vendredi"
+#jour_semi_ouvrables[0]="mercredi"
+#jour_semi_ouvrables[1]="samedi"
 #print(jour_ouvrables[2])
+
+h=time.hour
+m=time.minute
+
+if wd==0 or wd==1 or wd==2 or wd==3 :
+    if h==8 and m==20 or h==8 and m==25 :
+        print("sonnerie")
+    elif h==9 and m==20 or h==9 and m==25 :
+        print("sonnerie")
+    elif h==10 and m==25 or h==10 and m==35 :
+        print("sonnerie")
+    elif h==11 and m==30 or h==11 and m==35 :
+        print("sonnerie")
+    elif h==12 and m==30 or h==12 and m==50 or h==12 and m==55 :
+        print("sonnerie")
+    elif h==13 and m==45 or h==13 and m==50 :
+        print("sonnerie")
+    elif h==14 and m==45 or h==14 and m==50 :
+        print("sonnerie")
+    elif h==15 and m==45 or h==15 and m==55 :
+        print("sonnerie")
+    elif h==16 and m==0 or h==16 and m==55 :
+        print("sonnerie")
+    elif h==17 and m==0 or h==17 and m==55 :
+        print("sonnerie")
+    elif h==18 and m==0 :
+        print("sonnerie")
+    else:
+        print("pas de sonnerie")
