@@ -4,81 +4,74 @@ import time
 from time import sleep
 import os
 import pandas
-#fichier csv des heures de sonnerie
+
+#fichiers csv des heures de sonnerie :
+    #jours ouvrés :
 heures_j_ouvrables=pandas.read_csv("heures_jours_ouvres.csv")
+print(heures_j_ouvrables["heures"][0])
+print("informations lues :")
+for s in heures_j_ouvrables:
+    print(s)
+    print(heures_j_ouvrables[s])
+    
+    #jours semi_ouvrés :
 heures_j_semi_ouvrables=pandas.read_csv("heures_semi_ouvres.csv")
+print(heures_j_semi_ouvrables["heures"][0])
+print("informations lues :")
+for s in heures_j_semi_ouvrables:
+    print(s)
+    print(heures_j_semi_ouvrables[s])
 
 #jours ouvrables/semi-ouvrables
 def daysGenerator_ouvrables():
-    openDays=[0,1,2,4]
+    openDays=[0,1,3,4]
     return(openDays)
 
 def daysGenerator_semi_ouvrables():
     semi_openDays=[2,5]
     return(semi_openDays)
 
-jour_ouvrables=daysGenerator_ouvrables()
-jour_semi_ouvrables=daysGenerator_semi_ouvrables()
-#print(jour_ouvrables)
-#print(jour_semi_ouvrables)
+temps=datetime.now()
+wd=temps.weekday()
+"""
+test :
+print(wd)
 
-time=datetime.now()
-wd=time.weekday()
-#print(wd)
-
-#if wd==jour_ouvrables[0] or wd==jour_ouvrables[1] or wd==jour_ouvrables[2] or wd==jour_ouvrables[3]:
-    #print("jour ouvrable")
-#else:
-    #print("jour semi_ouvré")
-
-h=time.hour
-m=time.minute
+if wd==jour_ouvrables[0] or wd==jour_ouvrables[1] or wd==jour_ouvrables[2] or wd==jour_ouvrables[3]:
+    print("jour ouvrable")
+else:
+    print("jour semi_ouvrés")
+"""
+h=temps.hour
+m=temps.minute
 dt= datetime.today()
 seconds= dt.timestamp()
 
-print("h=",h,"wd=",wd,"m=",m)
-#sonnerie jours ouvrables
-if wd==0 or wd==1 or wd==3 or wd==4:
-    if h==8 and m==20 or h==8 and m==25 :
-        #os.system("Sonnerie.mp3")
-        sleep(5.00)
-        print("dring")
-        #os.system("taskkill/IM<Groove Musique>")
-        
-    elif h==9 and m==20 or h==9 and m==25 :
-        os.system("Sonnerie.mp3")
-    elif h==10 and m==25 or h==10 and m==35 :
-        os.system("Sonnerie.mp3")
-    elif h==11 and m==30 or h==11 and m==39 :
-        os.system("Sonnerie.mp3")
-    elif h==12 and m==30 or h==12 and m==50 or h==12 and m==55 :
-        os.system("Sonnerie.mp3")
-    elif h==13 and m==45 or h==13 and m==50 :
-        os.system("Sonnerie.mp3")
-    elif h==14 and m==45 or h==14 and m==50 :
-        os.system("Sonnerie.mp3")
-    elif h==15 and m==45 or h==15 and m==55 :
-        os.system("Sonnerie.mp3")
-    elif h==16 and m==0 or h==16 and m==55 :
-        os.system("Sonnerie.mp3")
-    elif h==17 and m==0 or h==17 and m==55 :
-        os.system("Sonnerie.mp3")
-    elif h==18 and m==0 :
-        os.system("Sonnerie.mp3")
-    else:
-        print("pas de sonnerie")
-        
-#sonnerie jours semi-ouvrés
-if wd==2 or wd==5:
-    if h==8 and m==20 or h==8 and m==25 :
-        os.system("Sonnerie.mp3")
-    elif h==9 and m==20 or h==9 and m==25 :
-        os.system("Sonnerie.mp3")
-    elif h==10 and m==25 or h==10 and m==35 :
-        os.system("Sonnerie.mp3")
-    elif h==11 and m==30 or h==11 and m==35 :
-        os.system("Sonnerie.mp3")
-    elif h==12 and m==30 :
-        os.system("Sonnerie.mp3")
-    else:
-        print("pas de sonnerie")
+while True:
+    print("\nMaintenant il est : h=",h,"wd=",wd,"m=",m,"s=",seconds,"\n")
+    #sonnerie jours ouvrables :
+    if wd==0 or wd==1 or wd==3 or wd==4:
+        #on parcourt le fichier CSV et on teste si l'heure actuelle y est présente
+        for i in range(len(heures_j_ouvrables["heures"])):
+            #print("h=%d m=%d s=%d son=%s"%(heures_j_ouvrables["heures"][i],heures_j_ouvrables["minutes"][i],heures_j_ouvrables["secondes"][i],heures_j_ouvrables["fichier_sonnerie"][i] ))
+            if(h==heures_j_ouvrables["heures"][i] and m==heures_j_ouvrables["minutes"][i]) and seconds==heures_j_ouvrables["secondes"][i]:
+                print("C'est l'heure de jouer :",heures_j_ouvrables["fichier_sonnerie"][i])
+                os.system(heures_j_ouvrables["fichier_sonnerie"][i])
+    wd=temps.weekday()
+    h=temps.hour
+    m=temps.minute
+    dt= datetime.today()
+    seconds= dt.timestamp()
+                
+    #sonnerie jours semi-ouvrés :
+    if wd==2 or wd==5:
+        #on parcourt le fichier CSV et on teste si l'heure actuelle y est présente
+        for i in range(len(heures_j_semi_ouvrables["heures"])):
+            #print("h=%d m=%d s=%d son=%s"%(heures_j_semi_ouvrables["heures"][i],heures_j_semi_ouvrables["minutes"][i],heures_j_ouvrables["secondes"][i],heures_j_semi_ouvrables["fichier_sonnerie"][i] ))
+            if(h==heures_j_semi_ouvrables["heures"][i] and m==heures_j_semi_ouvrables["minutes"][i]) and seconds==heures_j_ouvrables["secondes"][i]:
+                print("C'est l'heure de jouer :",heures_j_ouvrables["fichier_sonnerie"][i])
+                os.system(heures_j_ouvrables["fichier_sonnerie"][i])
+
+
+
+
