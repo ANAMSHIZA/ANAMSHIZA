@@ -55,7 +55,8 @@ if wd==0 or wd==1 or wd==2 or wd==3 or wd==4 or wd==5 :
         print("month=%d day=%d son=%s"%(jour_j_non_ouvrables["month"][i],jour_j_non_ouvrables["day"][i],jour_j_non_ouvrables["sonnerie.py"][i] ))
         if(month==jour_j_non_ouvrables["month"][i] and day==jour_j_non_ouvrables["day"][i]):
             print("C'est les vacances :",jour_j_non_ouvrables["sonnerie.py"][i])
-    
+            wd=time.weekday()
+
 #les jours fériés 
 if wd==0 or wd==1 or wd==2 or wd==3 or wd==4 or wd==5 :
     day= time.day
@@ -65,3 +66,4 @@ if wd==0 or wd==1 or wd==2 or wd==3 or wd==4 or wd==5 :
         print("month=%d day=%d son=%s"%(jour_j_non_ouvrables2["month"][i],jour_j_non_ouvrables2["day"][i],jour_j_non_ouvrables2["sonnerie.py"][i] ))
         if(month==jour_j_non_ouvrables2["month"][i] and day==jour_j_non_ouvrables2["day"][i]):
             print("C'est un jour férié :",jour_j_non_ouvrables2["sonnerie.py"][i])
+            wd=time.weekday()
