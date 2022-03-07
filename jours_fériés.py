@@ -6,9 +6,9 @@ import pandas
 jour_j_non_ouvrables=pandas.read_csv("lesvacances.csv")
 print(jour_j_non_ouvrables["month"][0])
 print("informations lues :")
-for s in jour_j_non_ouvrables:
-  print(s)
-  print(jour_j_non_ouvrables[s])
+for d in jour_j_non_ouvrables:
+  print(d)
+  print(jour_j_non_ouvrables[d])
   
 jour_j_non_ouvrables2=pandas.read_csv("lesjoursfériés.csv")
 print(jour_j_non_ouvrables2["month"][0])
