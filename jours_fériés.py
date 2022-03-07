@@ -1,10 +1,22 @@
 import datetime 
 from datetime import date
 import os
+import pandas 
 
-jour_ouvrables=[] 
-jour_semi_ouvrables=[]   
-
+jour_j_non_ouvrables=pandas.read_csv("lesvacances.csv")
+print(jour_j_non_ouvrables["month"][0])
+print("informations lues :")
+for s in jour_j_non_ouvrables:
+  print(s)
+  print(jour_j_non_ouvrables[s])
+  
+jour_j_non_ouvrables2=pandas.read_csv("lesjoursfériés.csv")
+print(jour_j_non_ouvrables2["month"][0])
+print("informations lues :")
+for s in jour_j_non_ouvrables2:
+    print(s)
+    print(jour_j_non_ouvrables2[s])
+      
 def daysGenerator_ouvrables():
     openDays=[0,1,2,4]
     return(openDays)
@@ -35,37 +47,21 @@ else:
 #print(jour_ouvrables[2])
 
 #les vacances
-if wd==0 or wd==1 or wd==2 or wd==3 or wd==4 or wd==5: 
-    day = time.day
-    month = time.month
-    print("month=",month,"day=",day)
-    if month==2 and day==21 or month==2 and day==22 or month==2 and day==23 or month==2 and day==24 or month==2 and day==25 or month==2 and day==26:
-        print ("Vacances donc pas de sonnerie")
-    elif month==2 and day==28 or month==3 and day==1 or month==3 and day==2 or month==3 and day==3 or month==3 and day==4 or month==3 and day==5:
-        print ("Vacances donc pas de sonnerie")
-    elif month==4 and day==25 or month==4 and day==26 or month==4 and day==27 or month==4 and day==28 or month==4 and day==29 or month==4 and day==30:
-        print ("Vacances donc pas de sonnerie")
-    elif month==5 and day==2 or month==5 and day==3 or month==5 and day==4 or month==5 and day==5 or month==5 and day==6 or month==5 and day==6:
-        print ("Vacances donc pas de sonnerie")
-    elif month==7:
-        print ("Vacances donc pas de sonnerie")
-    elif month==8: 
-        print ("Vacances donc pas de sonnerie")
-    elif month==10 and day==24 or month==10 and day==25 or month==10 and day==26 or month==10 and day==27 or month==10 and day==28 or month==10 and day==29:
-        print ("Vacances donc pas de sonnerie")
-    elif month==10 and day==31 or month==11 and day==1 or month==11 and day==2 or month==11 and day==3 or month==11 and day==4 or month==11 and day==5:
-        print ("Vacances donc pas de sonnerie")
-    elif month==12 and day==19 or month==12 and day==20 or month==12 and day==21 or month==12 and day==22 or month==12 and day==23 or month==12 and day==24:
-         print ("Vacances donc pas de sonnerie")
-    elif month==12 and day==26 or month==12 and day==27 or month==12 and day==28 or month==12 and day==29 or month==12 and day==30 or month==12 and day==31:
-         print ("Vacances donc pas de sonnerie")
-
-#les jours fériés
-    if month==4 and day==18:
-        print ("Fériés donc pas de sonnerie")
-    elif month==5 and day==26:
-        print ("Fériés donc pas de sonnerie")
-    elif month==6 and day==6:
-        print ("Fériés donc pas de sonnerie")
-    elif month==11 and day==11:
-        print ("Fériés donc pas de sonnerie")
+if wd==0 or wd==1 or wd==2 or wd==3 or wd==4 or wd==5 :
+    day= time.day
+    month=time.month
+    #on parcourt le fichier CSV et on teste le jour où c'est les vacances
+    for i in range(len(jour_j_non_ouvrables["wd"])):
+        print("month=%d day=%d son=%s"%(jour_j_non_ouvrables["month"][i],jour_j_non_ouvrables["day"][i],jour_j_non_ouvrables["sonnerie.py"][i] ))
+        if(month==jour_j_non_ouvrables["month"][i] and day==jour_j_non_ouvrables["day"][i]):
+            print("C'est les vacances :",jour_j_non_ouvrables["sonnerie.py"][i])
+    
+#les jours fériés 
+if wd==0 or wd==1 or wd==2 or wd==3 or wd==4 or wd==5 :
+    day= time.day
+    month=time.month
+    #on parcourt le fichier CSV et on teste le jour où c'est fériés
+    for i in range(len(jour_j_non_ouvrables2["wd"])):
+        print("month=%d day=%d son=%s"%(jour_j_non_ouvrables2["month"][i],jour_j_non_ouvrables2["day"][i],jour_j_non_ouvrables2["sonnerie.py"][i] ))
+        if(month==jour_j_non_ouvrables2["month"][i] and day==jour_j_non_ouvrables2["day"][i]):
+            print("C'est un jour férié :",jour_j_non_ouvrables2["sonnerie.py"][i])
